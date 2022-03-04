@@ -1,14 +1,15 @@
 #使用说明：
 
 #### 1. export TAG 变量，通常作为代码发布 版本
-export tag=1.0
+`export tag=1.0`
 #### 2. 登录docker hub
-docker login -u <username>
+`docker login -u <username>`
 #### 3. 进行打包推送镜像
-make push
+`make push`
 #### 4. 在任何地方都可以跑httpserver
-docker run -d --name test -p 8080:8080 lostar01/mycncamp-httpserver:1.0
+`docker run -d --name test -p 8080:8080 lostar01/mycncamp-httpserver:1.0`
 #### 5. 查看容器IP配置
+(```)
   root@kali:~# lsns -t net
         NS TYPE NPROCS   PID USER     NETNSID NSFS                           COMMAND
 4026531992 net     238     1 root  unassigned                                /sbin/init
@@ -24,3 +25,5 @@ root@kali:~# nsenter -t 16788 -n ip add
     link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
     inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
        valid_lft forever preferred_lft forever
+  
+  (```)
