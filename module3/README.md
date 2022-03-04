@@ -9,7 +9,7 @@
 #### 4. 在任何地方都可以跑httpserver
 `docker run -d --name test -p 8080:8080 lostar01/mycncamp-httpserver:1.0`
 #### 5. 查看容器IP配置
-(```)
+```
   root@kali:~# lsns -t net
         NS TYPE NPROCS   PID USER     NETNSID NSFS                           COMMAND
 4026531992 net     238     1 root  unassigned                                /sbin/init
@@ -26,4 +26,4 @@ root@kali:~# nsenter -t 16788 -n ip add
     inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
        valid_lft forever preferred_lft forever
  
-(```)
+```
