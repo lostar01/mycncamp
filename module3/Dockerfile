@@ -1,8 +1,17 @@
-FROM scratch
+FROM golang:1.17 AS build
+WORKDIR /httpserver/
+COPY . .
+ENV CGO_ENABLE=0
+ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
+#RUN GOOS=linux go build -installsuffix cgo -o http_server http_server.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o . *.go
 
+FROM busybox
 MAINTAINER "lostar01"
-COPY bin/amd64/http_server /app/http_server
+COPY --from=build /httpserver/http_server /app/http_server
 
 EXPOSE 8080
 WORKDIR /app
-ENTRYPOINT [ "/app/http_server" ]
+#ENTRYPOINT [ "/app/http_server" ]
+CMD [ "/app/http_server" ]

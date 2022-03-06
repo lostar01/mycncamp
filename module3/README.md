@@ -1,13 +1,13 @@
 #使用说明：
 
 #### 1. export TAG 变量，通常作为代码发布 版本
-`export tag=1.0`
+`export tag=<VERSION>`
 #### 2. 登录docker hub
 `docker login -u <username>`
 #### 3. 进行打包推送镜像
 `make push`
 #### 4. 在任何地方都可以跑httpserver
-`docker run -d --name test -p 8080:8080 lostar01/mycncamp-httpserver:1.0`
+`docker run -d --name test -p 8080:8080 lostar01/mycncamp-httpserver:<VERSION>`
 #### 5. 查看容器IP配置
 ```
   root@kali:~# lsns -t net
