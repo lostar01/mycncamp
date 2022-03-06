@@ -13,5 +13,4 @@ COPY --from=build /httpserver/http_server /app/http_server
 
 EXPOSE 8080
 WORKDIR /app
-#ENTRYPOINT [ "/app/http_server" ]
-CMD [ "/app/http_server" ]
+ENTRYPOINT [ "/app/http_server" ]
