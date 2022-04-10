@@ -7,7 +7,8 @@ ENV GOPROXY=https://goproxy.cn,direct
 #RUN GOOS=linux go build -installsuffix cgo -o http_server http_server.go
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o . *.go
 
-FROM busybox
+FROM scratch
+#FROM busybox
 MAINTAINER "lostar01"
 COPY --from=build /httpserver/http_server /app/http_server
 
