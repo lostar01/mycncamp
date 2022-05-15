@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: httpserver-tls-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "httpserver.lostar.com"
+    tls:
+      mode: SIMPLE
+      credentialName: httpserver
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpserver-tls
+spec:
+  hosts:
+  - "httpserver.lostar.com"
+  gateways:
+  - httpserver-tls-gateway
+  http:
+  - match:
+    - port: 443
+    route:
+    - destination:
+        host: httpserver-service.httpserver.svc.cluster.local
+        port:
+          number: 8080
